@@ -20,7 +20,7 @@ variable "switch_hostname-sw1b" {
 ################## HOSTNAME ###############
 resource "nxos_system" "hostname-switch1a" {
   provider = nxos.switch1a
-  name = "${var.switch_hostname}"
+  name = "${var.switch_hostname-sw1a}"
 }
 resource "nxos_system" "hostname-switch1b" {
   provider = nxos.switch1b
