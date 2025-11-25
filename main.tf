@@ -12,7 +12,10 @@ variable "switch_hostname-sw1b" {
   default = "Switch-1B"
 } 
 
-
+################## MODULE ###############
+module "config-SW1a" {
+  source = "./modules/Switch1a"
+}
 
 ################## HOSTNAME ###############
 resource "nxos_system" "hostname-switch1a" {
