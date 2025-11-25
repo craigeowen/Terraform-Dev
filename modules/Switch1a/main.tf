@@ -5,3 +5,71 @@ terraform {
     }
   }
 }
+
+################## HOSTNAME ###############
+resource "nxos_system" "hostname-switch1a" {
+  provider = nxos.switch1a
+  name = "${var.switch_hostname-sw1a}"
+
+
+}
+
+resource "nxos_vrf" "example" {
+  provider = nxos.switch1a
+  name = "VRF1"
+}
+
+#################Interface lo123######################
+resource "nxos_loopback_interface" "lo123" {
+  provider = nxos.switch1a
+  interface_id = "lo123"
+  admin_state  = "down"
+  description  = "My Description"
+}
+
+resource "nxos_loopback_interface_vrf" "lo123" {
+  provider = nxos.switch1a
+  interface_id = "lo123"
+  vrf_dn = "sys/inst-VRF1"
+}
+
+resource "nxos_ipv4_interface" "lo123" {
+  provider = nxos.switch1a
+  vrf          = "VRF1"
+  interface_id = "lo123"
+}
+
+resource "nxos_ipv4_interface_address" "lo123" {
+  provider = nxos.switch1a
+  vrf          = "VRF1"
+  interface_id = "lo123"
+  address      = var.three_octet
+}
+
+#################Interface leth1/7######################
+resource "nxos_physical_interface" "eth1_7" {
+  provider = nxos.switch1a
+  interface_id = "eth1/7"
+  admin_state  = "up"
+  description  = "My Description"
+  layer = "Layer3"
+}
+
+resource "nxos_physical_interface_vrf" "eth1_7" {
+  provider = nxos.switch1a
+  interface_id = "eth1/7"
+  vrf_dn = "sys/inst-VRF1"
+}
+
+resource "nxos_ipv4_interface" "eth1_7" {
+  provider = nxos.switch1a
+  vrf          = "VRF1"
+  interface_id = "eth1/7"
+}
+
+resource "nxos_ipv4_interface_address" "eth1_7" {
+  provider = nxos.switch1a
+  vrf          = "VRF1"
+  interface_id = "eth1/7"
+  address      = "24.63.46.49/30"
+}
