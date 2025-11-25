@@ -6,10 +6,7 @@ terraform {
   }
 }
 
-variable "switch_hostname-sw1a" {
-  type    = string
-  default = "Switch-1A"
-}     
+     
 variable "switch_hostname-sw1b" {
   type    = string
   default = "Switch-1B"
