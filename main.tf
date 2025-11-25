@@ -15,7 +15,8 @@ variable "switch_hostname-sw1b" {
 ################## MODULE ###############
 module "config-SW1a" {
   source = "./modules/Switch1a"
-  three_octet = "${var.three_octet}"
+#  three_octet = "${var.three_octet}.6/32"
+  three_octet = var.three_octet
 }
 
 ################## HOSTNAME ###############

@@ -24,7 +24,7 @@ resource "nxos_loopback_interface" "lo123" {
   provider = nxos.switch1a
   interface_id = "lo123"
   admin_state  = "down"
-  description  = "My Description"
+  description = var.three_octet
 }
 
 resource "nxos_loopback_interface_vrf" "lo123" {
@@ -43,7 +43,8 @@ resource "nxos_ipv4_interface_address" "lo123" {
   provider = nxos.switch1a
   vrf          = "VRF1"
   interface_id = "lo123"
-  address      = var.three_octet
+#  address      = var.three_octet
+  address      = "${var.three_octet}.${var.four_octet}/32"
 }
 
 #################Interface leth1/7######################

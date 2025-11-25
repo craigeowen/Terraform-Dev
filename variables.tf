@@ -5,5 +5,5 @@ variable "switch_hostname-sw1a" {
 
 variable "three_octet" {
     type = string
-    default = "7.7.7.2/32"
+    default = "9.9.9"
 }
