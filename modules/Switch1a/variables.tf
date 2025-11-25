@@ -3,12 +3,9 @@ variable "switch_hostname-sw1a" {
   default = "test-Switch-100A"
 }
 
-variable "three_octet" {
-#    type = string
-#    default = "1.7.7.7/32"
-}
+variable "three_octet" {}
 
 variable "four_octet" {
     type = string
-    default = "20"
+    default = "21"
 }
