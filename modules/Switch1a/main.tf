@@ -10,8 +10,6 @@ terraform {
 resource "nxos_system" "hostname-switch1a" {
   provider = nxos.switch1a
   name = "${var.switch_hostname-sw1a}"
-
-
 }
 
 resource "nxos_vrf" "vrf-VRF1-switch1a" {
@@ -103,4 +101,12 @@ resource "nxos_ipv4_interface_address" "lo33-switch1a" {
   vrf          = "${var.vrf-VRF2}"
   interface_id = "lo33"
   address      = "${var.three_octet}.${var.four_octet_lo33}/32"
+}
+
+
+#####
+#####Config Save#####
+#####
+resource "nxos_save_config" "save-switch1a" {
+  provider = nxos.switch1a
 }

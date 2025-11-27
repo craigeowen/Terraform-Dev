@@ -13,7 +13,7 @@ variable "four_octet_lo123" {
 
 variable "four_octet_lo33" {
     type = string
-    default = "10"
+    default = "11"
 }
 
 variable "vrf-VRF1" {}
