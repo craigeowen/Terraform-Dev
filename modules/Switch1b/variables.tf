@@ -6,9 +6,15 @@ variable "switch_hostname-sw1b" {
 
 variable "three_octet" {}
 
-variable "four_octet" {
+variable "four_octet_lo123" {
     type = string
     default = "2"
 }
 
+variable "four_octet_lo33" {
+    type = string
+    default = "12"
+}
+
 variable "vrf-VRF1" {}
+variable "vrf-VRF2" {}

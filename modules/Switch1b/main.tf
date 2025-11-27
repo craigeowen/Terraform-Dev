@@ -10,13 +10,15 @@ terraform {
 resource "nxos_system" "hostname-switch1b" {
   provider = nxos.switch1b
   name = "${var.switch_hostname-sw1b}"
-
-
 }
 
 resource "nxos_vrf" "vrf-VFR1-switch1b" {
   provider = nxos.switch1b
   name = var.vrf-VRF1
+}
+resource "nxos_vrf" "vrf-VFR2-switch1b" {
+  provider = nxos.switch1b
+  name = var.vrf-VRF2
 }
 
 #################Interface lo123######################
@@ -30,20 +32,20 @@ resource "nxos_loopback_interface" "lo123-switch1b" {
 resource "nxos_loopback_interface_vrf" "lo123-switch1b" {
   provider = nxos.switch1b
   interface_id = "lo123"
-  vrf_dn = "sys/inst-VRF1"
+  vrf_dn = "sys/inst-${var.vrf-VRF1}"
 }
 
 resource "nxos_ipv4_interface" "lo123-switch1b" {
   provider = nxos.switch1b
-  vrf          = "VRF1"
+  vrf          = "${var.vrf-VRF1}"
   interface_id = "lo123"
 }
 
 resource "nxos_ipv4_interface_address" "lo123-switch1b" {
   provider = nxos.switch1b
-  vrf          = "VRF1"
+  vrf          = "${var.vrf-VRF1}"
   interface_id = "lo123"
-  address      = "${var.three_octet}.${var.four_octet}/32"
+  address      = "${var.three_octet}.${var.four_octet_lo123}/32"
 }
 
 #################Interface leth1/7######################
@@ -72,4 +74,39 @@ resource "nxos_ipv4_interface_address" "eth1_7-switch1b" {
   vrf          = "VRF1"
   interface_id = "eth1/7"
   address      = "24.63.46.50/30"
+}
+
+#################Interface lo33######################
+resource "nxos_loopback_interface" "lo33-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "lo33"
+  admin_state  = "down"
+  description = var.three_octet
+}
+
+resource "nxos_loopback_interface_vrf" "lo33-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "lo33"
+  vrf_dn = "sys/inst-${var.vrf-VRF2}"
+}
+
+resource "nxos_ipv4_interface" "lo33-switch1b" {
+  provider = nxos.switch1b
+  vrf          = "${var.vrf-VRF2}"
+  interface_id = "lo33"
+}
+
+resource "nxos_ipv4_interface_address" "lo33-switch1b" {
+  provider = nxos.switch1b
+  vrf          = "${var.vrf-VRF2}"
+  interface_id = "lo33"
+  address      = "${var.three_octet}.${var.four_octet_lo33}/32"
+}
+
+
+#####
+#####Config Save#####
+#####
+resource "nxos_save_config" "save-switch1b" {
+  provider = nxos.switch1b
 }
