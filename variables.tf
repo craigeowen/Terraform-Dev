@@ -9,3 +9,8 @@ variable "vrf-VRF1" {
     type = string
     default = "VRF1"
 }
+
+variable "vrf-VRF2" {
+    type = string
+    default = "VRF2"
+}
