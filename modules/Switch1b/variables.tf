@@ -1,12 +1,12 @@
 
-variable "switch_hostname-sw1a" {
+variable "switch_hostname-sw1b" {
   type    = string
-  default = "test-Switch-100A"
+  default = "test-Switch-200A"
 }
 
 variable "three_octet" {}
 
 variable "four_octet" {
     type = string
-    default = "1"
+    default = "2"
 }
