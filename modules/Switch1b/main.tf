@@ -16,7 +16,7 @@ resource "nxos_system" "hostname-switch1b" {
 
 resource "nxos_vrf" "vrf-VFR1-switch1b" {
   provider = nxos.switch1b
-  name = "VRF1"
+  name = var.vrf-VRF1
 }
 
 #################Interface lo123######################

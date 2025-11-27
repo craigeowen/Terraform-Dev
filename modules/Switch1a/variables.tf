@@ -10,3 +10,5 @@ variable "four_octet" {
     type = string
     default = "1"
 }
+
+variable "vrf-VRF1" {}
