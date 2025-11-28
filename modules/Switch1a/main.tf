@@ -110,3 +110,4 @@ resource "nxos_ipv4_interface_address" "lo33-switch1a" {
 resource "nxos_save_config" "save-switch1a" {
   provider = nxos.switch1a
 }
+
