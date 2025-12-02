@@ -24,3 +24,12 @@ module "config-SW1b" {
   vrf-VRF2 = var.vrf-VRF2
 }
 
+####################################################
+     
+resource "nxos_loopback_interface" "loxxx-switch1a" {
+  provider = nxos.switch1a
+  for_each = { for lb in var.loopbacks-xxx : lb.interface_id => lb }
+  interface_id = each.value.interface_id
+  admin_state  = each.value.admin_state
+  description  = each.value.description   
+}

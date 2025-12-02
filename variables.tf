@@ -14,3 +14,12 @@ variable "vrf-VRF2" {
     type = string
     default = "VRF2"
 }
+
+####################################################
+variable "loopbacks-xxx" {
+    type = list(object({
+        interface_id = string
+        admin_state  = string
+        description  = string
+    }))
+}
