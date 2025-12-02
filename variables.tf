@@ -1,7 +1,7 @@
 
 variable "three_octet" {
     type = string
-    default = "11.11.11"
+#    default = "11.11.11"
 
 }
 

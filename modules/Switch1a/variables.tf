@@ -18,3 +18,12 @@ variable "four_octet_lo33" {
 
 variable "vrf-VRF1" {}
 variable "vrf-VRF2" {}
+
+####################################################
+variable "loopbacks-xxx" {
+    type = list(object({
+        interface_id = string
+        admin_state  = string
+        description  = string
+    }))
+}

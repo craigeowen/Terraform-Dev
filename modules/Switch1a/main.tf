@@ -103,6 +103,15 @@ resource "nxos_ipv4_interface_address" "lo33-switch1a" {
   address      = "${var.three_octet}.${var.four_octet_lo33}/32"
 }
 
+####################################################
+     
+resource "nxos_loopback_interface" "loxxx-switch1b" {
+  provider = nxos.switch1a
+  for_each = { for lb in var.loopbacks-xxx : lb.interface_id => lb }
+  interface_id = each.value.interface_id
+  admin_state  = each.value.admin_state
+  description  = each.value.description   
+}
 
 #####
 #####Config Save#####

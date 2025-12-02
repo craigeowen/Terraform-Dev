@@ -5,13 +5,13 @@ vrf-VRF1 = "VRF1"
 
 loopbacks-xxx = [
    {
-            interface_id = "lo333"
+            interface_id = "lo555"
             admin_state  = "down"
-            description  = "loopback 333"
+            description  = "loopback 555"
         },
     {
-            interface_id = "lo444"
+            interface_id = "lo666"
             admin_state  = "down"
-            description  = "loopback 444"
+            description  = "loopback 666"
         }    
 ]
