@@ -7,16 +7,16 @@ terraform {
 }
 
 
-resource "nxos_port_channel_interface" "po4-switch1a" {
-   provider             = nxos.switch1a
-  interface_id          = "po4"
-  port_channel_mode     = "active"
-  minimum_links         = 1
-  admin_state           = "down"
-  description           = "### vPC peer-keepalive ###"
-  layer                 = "Layer3" 
-  mtu                   = 9216
-}
+#resource "nxos_port_channel_interface" "po4-switch1a" {
+  #rovider             = nxos.switch1a
+  #interface_id          = "po4"
+  #port_channel_mode     = "active"
+  #minimum_links         = 1
+  #admin_state           = "down"
+  #description           = "### vPC peer-keepalive ###"
+  #layer                 = "Layer3" 
+  #mtu                   = 9216
+#}
 
 #resource "nxos_subinterface" "po4_3210-switch1a" {
 #  interface_id          = "po4.3210"

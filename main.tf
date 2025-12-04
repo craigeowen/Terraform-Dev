@@ -22,7 +22,7 @@ module "config-SW1a" {
     {       interface_id = var.loopbacks-xxx[1].interface_id
             admin_state  = var.loopbacks-xxx[1].admin_state
             description  = var.loopbacks-xxx[1].description
-        }    
+        }   
 ]
 } 
 
