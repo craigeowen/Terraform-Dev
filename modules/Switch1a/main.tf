@@ -23,7 +23,7 @@ module "config-SW1a-ipv4_address" {
    ###take the Top Level variable and use in module### 
 }
 module "config-SW1a-VPC" {
-  source = "./modules/vlan"
+  source = "./modules/VPC"
    ###take the Top Level variable and use in module### 
 }
 

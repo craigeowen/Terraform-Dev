@@ -42,6 +42,44 @@ resource "nxos_port_channel_interface_vrf" "po-vrf-switch1b" {
   vrf_dn       = "sys/inst-vpc"
 }
 
+#####Configure VPC Peer-Link - physical and Port channel#####
+
+resource "nxos_physical_interface" "e1-2-port-channle01-switch1b" {
+  provider = nxos.switch1b
+  interface_id          = "eth1/2"
+  admin_state           = "up"
+  mode                  = "trunk"
+  trunk_vlans           = "1-4094"
+  description           = "### vPC peer-link ###"
+  layer                 = "Layer2"
+}
+
+resource "nxos_port_channel_interface_member" "po1-member-eth1_1-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "po1"
+  interface_dn = "sys/intf/phys-[eth1/2]"
+  force        = false
+}
+  resource "nxos_port_channel_interface_member" "po1-member-eth1_2-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "po1"
+  interface_dn = "sys/intf/phys-[eth1/3]"
+  force        = false
+  }
+
+resource "nxos_port_channel_interface" "po1-switch1b" {
+  provider = nxos.switch1b
+  interface_id          = "po1"
+  port_channel_mode     = "active"
+  minimum_links         = 1
+  suspend_individual    = "disable"
+  admin_state           = "up"
+  mode                  = "trunk"
+  trunk_vlans           = "1-4094"
+  description           = "### vPC peer-link ###"
+  layer                 = "Layer2"
+ }
+
 #resource "nxos_subinterface" "po4_3210-switch1b" {
 #  provider             = nxos.switch1b  
 #  interface_id          = "po4.3210"

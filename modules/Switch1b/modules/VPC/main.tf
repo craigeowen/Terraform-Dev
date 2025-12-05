@@ -23,3 +23,8 @@ resource "nxos_vpc_keepalive" "vpc-keepalive-switch1b" {
   source_ip                          = "1.1.1.2"
   vrf                                = "vpc"
 }
+
+resource "nxos_vpc_peerlink" "vpc-peerlink-switch1b" {
+  provider = nxos.switch1b
+  port_channel_id = "po1"
+}
