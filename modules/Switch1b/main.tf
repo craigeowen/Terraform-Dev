@@ -6,6 +6,15 @@ terraform {
   }
 }
 
+module "config-SW1b-pc" {
+  source = "./modules/port-channel"
+   ###take the Top Level variable and use in module### 
+}
+module "config-SW1b-vlan" {
+  source = "./modules/vlan"
+   ###take the Top Level variable and use in module### 
+}
+
 ################## HOSTNAME ###############
 resource "nxos_system" "hostname-switch1b" {
   provider = nxos.switch1b
