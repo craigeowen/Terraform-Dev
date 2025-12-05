@@ -7,16 +7,40 @@ terraform {
 }
 
 
+resource "nxos_port_channel_interface" "po4-switch1b" {
+  provider             = nxos.switch1b
+  interface_id          = "po4"
+  port_channel_mode     = "active"
+  minimum_links         = 1
+  admin_state           = "up"
+  description           = "### vPC peer-keepalive ###"
+  layer                 = "Layer3" 
+  mtu                   = 9216
+}
+
+resource "nxos_port_channel_interface_member" "po-member-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "po4"
+  interface_dn = "sys/intf/phys-[eth1/1]"
+  force        = true
+}
+
 #resource "nxos_port_channel_interface" "po4-switch1b" {
-  #provider             = nxos.switch1b
-  #interface_id          = "po4"
-  #port_channel_mode     = "active"
-  #minimum_links         = 1
-  #admin_state           = "down"
-  #description           = "### vPC peer-keepalive ###"
-  #layer                 = "Layer3" 
-  #mtu                   = 9216
+#  provider             = nxos.switch1b
+#  interface_id          = "po4"
+#  port_channel_mode     = "active"
+#  minimum_links         = 1
+#  admin_state           = "down"
+#  description           = "### vPC peer-keepalive ###"
+#  layer                 = "Layer3" 
+#  mtu                   = 9216
 #}
+
+resource "nxos_port_channel_interface_vrf" "po-vrf-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "po4"
+  vrf_dn       = "sys/inst-vpc"
+}
 
 #resource "nxos_subinterface" "po4_3210-switch1b" {
 #  provider             = nxos.switch1b  

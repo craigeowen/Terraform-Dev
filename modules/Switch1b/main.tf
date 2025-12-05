@@ -14,6 +14,28 @@ module "config-SW1b-vlan" {
   source = "./modules/vlan"
    ###take the Top Level variable and use in module### 
 }
+#module "config-SW1b-interface" {
+#  source = "./modules/interface"
+#   ###take the Top Level variable and use in module### 
+#}
+module "config-SW1b-ipv4_address" {
+  source = "./modules/ipv4_address"
+   ###take the Top Level variable and use in module### 
+}
+module "config-SW1b-VPC" {
+  source = "./modules/VPC"
+   ###take the Top Level variable and use in module### 
+}
+
+#####Enable Feature - VPC and LACP#####
+resource "nxos_feature_vpc" "feature_vpc-switch1b" {
+  provider = nxos.switch1b
+  admin_state = "enabled"
+}
+resource "nxos_feature_lacp" "feature_lacp-switch1b" {
+  provider = nxos.switch1b
+  admin_state = "enabled"
+}
 
 ################## HOSTNAME ###############
 resource "nxos_system" "hostname-switch1b" {
@@ -21,6 +43,7 @@ resource "nxos_system" "hostname-switch1b" {
   name = "${var.switch_hostname-sw1b}"
 }
 
+################## VRF ###############
 resource "nxos_vrf" "vrf-VFR1-switch1b" {
   provider = nxos.switch1b
   name = var.vrf-VRF1
@@ -28,6 +51,10 @@ resource "nxos_vrf" "vrf-VFR1-switch1b" {
 resource "nxos_vrf" "vrf-VFR2-switch1b" {
   provider = nxos.switch1b
   name = var.vrf-VRF2
+}
+resource "nxos_vrf" "vrf-vpc-switch1b" {
+  provider = nxos.switch1b
+  name = var.vrf-vpc
 }
 
 #################Interface lo123######################

@@ -18,6 +18,7 @@ variable "four_octet_lo33" {
 
 variable "vrf-VRF1" {}
 variable "vrf-VRF2" {}
+variable "vrf-vpc" {}
 
 ####################################################
 variable "loopbacks-xxx" {

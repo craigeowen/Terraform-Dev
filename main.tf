@@ -13,6 +13,7 @@ module "config-SW1a" {
   three_octet = var.three_octet
   vrf-VRF1 = var.vrf-VRF1
   vrf-VRF2 = var.vrf-VRF2
+  vrf-vpc = var.vrf-vpc
   loopbacks-xxx = [
    {
             interface_id = var.loopbacks-xxx[0].interface_id
@@ -32,6 +33,7 @@ module "config-SW1b" {
   three_octet = var.three_octet
   vrf-VRF1 = var.vrf-VRF1
   vrf-VRF2 = var.vrf-VRF2
+  vrf-vpc = var.vrf-vpc
   loopbacks-xxx = [
    {
             interface_id = var.loopbacks-xxx[0].interface_id

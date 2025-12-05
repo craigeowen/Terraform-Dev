@@ -15,6 +15,11 @@ variable "vrf-VRF2" {
     default = "VRF2"
 }
 
+variable "vrf-vpc" {
+    type = string
+    default = "vpc"
+}
+
 ####################################################
 variable "loopbacks-xxx" {
     type = list(object({
