@@ -80,6 +80,28 @@ resource "nxos_port_channel_interface" "po1-switch1b" {
   layer                 = "Layer2"
  }
 
+#####Configure Member - physical and Port channel#####
+
+resource "nxos_port_channel_interface" "po10-switch1b" {
+  provider             = nxos.switch1b
+  interface_id          = "po10"
+  port_channel_mode     = "active"
+  minimum_links         = 1
+  admin_state           = "up"
+  description           = "### Link to BGP switch ###"
+  layer                 = "Layer2" 
+  mode                 = "trunk"
+  mtu                   = 1500
+  trunk_vlans          = "1100"
+}
+
+  resource "nxos_port_channel_interface_member" "po1-member-eth1_5-switch1b" {
+  provider = nxos.switch1b
+  interface_id = "po10"
+  interface_dn = "sys/intf/phys-[eth1/5]"
+  force        = false
+  }
+
 #resource "nxos_subinterface" "po4_3210-switch1b" {
 #  provider             = nxos.switch1b  
 #  interface_id          = "po4.3210"

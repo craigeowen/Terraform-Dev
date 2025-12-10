@@ -14,10 +14,10 @@ module "config-SW1b-vlan" {
   source = "./modules/vlan"
    ###take the Top Level variable and use in module### 
 }
-#module "config-SW1b-interface" {
-#  source = "./modules/interface"
-#   ###take the Top Level variable and use in module### 
-#}
+module "config-SW1b-interface" {
+  source = "./modules/interface"
+   ###take the Top Level variable and use in module### 
+}
 module "config-SW1b-ipv4_address" {
   source = "./modules/ipv4_address"
    ###take the Top Level variable and use in module### 
