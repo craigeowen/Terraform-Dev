@@ -29,3 +29,15 @@ resource "nxos_physical_interface" "int-e1_6-switch1a" {
   mtu                      = 1500
   admin_state             = "up"
 }
+
+resource "nxos_loopback_interface" "int-lo101-switch1a" {
+  provider = nxos.switch1a
+  interface_id = "lo101"
+  admin_state = "up"
+  description = "### Loopback 101 ###"
+}
+resource "nxos_loopback_interface_vrf" "int-lo101-VRF1-switch1a" {
+  provider = nxos.switch1a
+  interface_id = "lo101"
+  vrf_dn       = "sys/inst-VRF1"
+}

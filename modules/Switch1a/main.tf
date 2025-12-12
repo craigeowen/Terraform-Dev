@@ -26,6 +26,10 @@ module "config-SW1a-VPC" {
   source = "./modules/VPC"
    ###take the Top Level variable and use in module### 
 }
+module "config-SW1a-BGP" {
+  source = "./modules/bgp"
+   ###take the Top Level variable and use in module### 
+}
 
 #####Enable Feature - VPC and LACP#####
 resource "nxos_feature_vpc" "feature_vpc-switch1a" {
@@ -33,6 +37,14 @@ resource "nxos_feature_vpc" "feature_vpc-switch1a" {
   admin_state = "enabled"
 }
 resource "nxos_feature_lacp" "feature_lacp-switch1a" {
+  provider = nxos.switch1a 
+  admin_state = "enabled"
+}
+resource "nxos_feature_bgp" "feature_bgp-switch1a" {
+  provider = nxos.switch1a 
+  admin_state = "enabled"
+}
+resource "nxos_feature_bfd" "feature_bfd-switch1a" {
   provider = nxos.switch1a 
   admin_state = "enabled"
 }
