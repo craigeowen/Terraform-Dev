@@ -71,20 +71,32 @@ resource "nxos_bgp_peer_template_address_family" "pt-ibgp-baseline-AF-switch1a" 
 }
 
 ##### Add BGP Peer #####
-resource "nxos_bgp_peer" "bgp-peer-switch1a" {
+resource "nxos_bgp_peer" "bgp-peer-AGG02-switch1a" {
   provider = nxos.switch1a
   asn               = "65201"
   vrf               = "VRF1"
   address           = "10.24.1.253"
-  remote_asn        = "65201"
   description       = "TF-BGP-TO-AGG02"
   peer_template     = "ibgp-baseline"
   source_interface  = "lo0"
-  hold_time         = 30
-  keepalive         = 10
-  peer_control      = "bfd"
-  password_type     = "0"
-  password          = "password123"
+}
+resource "nxos_bgp_peer" "bgp-peer-EDG01-switch1a" {
+  provider = nxos.switch1a
+  asn               = "65201"
+  vrf               = "VRF1"
+  address           = "10.24.1.250"
+  description       = "TF-BGP-TO-EDG01"
+  peer_template     = "ibgp-baseline"
+  source_interface  = "lo0"
+}
+resource "nxos_bgp_peer" "bgp-peer-EDG02-switch1a" {
+  provider = nxos.switch1a
+  asn               = "65201"
+  vrf               = "VRF1"
+  address           = "10.24.1.251"
+  description       = "TF-BGP-TO-EDG02"
+  peer_template     = "ibgp-baseline"
+  source_interface  = "lo0"
 }
 
 ##### Add BGP with API #####
@@ -110,6 +122,36 @@ resource "nxos_rest" "test-bgp-pt-peeraf-switch1a" {
   }
 }
 
+resource "nxos_rest" "test-bgp-peeraf-switch1a" {
+  provider = nxos.switch1a
+  dn = "sys/bgp/inst/dom-[VRF1]/peer-[10.24.1.253]/af-[ipv4-ucast]"
+  class_name = "bgpPeerAf"
+  content = {
+    #"ctrl": ""
+    "inheritContPeerPolicyCtrl": "rr-client"
+  }
+}
+
+resource "nxos_rest" "test-bgp-pt-EBGP-peercont-switch1a" {
+  provider = nxos.switch1a
+  dn = "sys/bgp/inst/dom-[default]/peercont-[EBGP-BASELINE]"
+  class_name = "bgpPeerCont"
+  content = {
+    "holdIntvl": "30",
+    "kaIntvl": "10",
+    "ctrl": "bfd"
+    #"password": "password123"
+
+  }
+}
+resource "nxos_rest" "test-bgp-pt-EBGPpeeraf-switch1a" {
+  provider = nxos.switch1a
+  dn = "sys/bgp/inst/dom-[default]/peercont-[EBGP-BASELINE]/af-[ipv4-ucast]"
+  class_name = "bgpPeerAf"
+  content = {
+     "softReconfigBackup": "inbound"
+  }
+}
 
 ##### Add Address Family #####
 #resource "nxos_bgp_vrf_address_family" "ibgp-vrf-af-switch1a" {

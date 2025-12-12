@@ -30,6 +30,10 @@ module "config-SW1a-BGP" {
   source = "./modules/bgp"
    ###take the Top Level variable and use in module### 
 }
+module "config-SW1a-API" {
+  source = "./modules/api"
+   ###take the Top Level variable and use in module### 
+}
 
 #####Enable Feature - VPC and LACP#####
 resource "nxos_feature_vpc" "feature_vpc-switch1a" {
