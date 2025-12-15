@@ -171,4 +171,3 @@ resource "nxos_loopback_interface" "loxxx-switch1b" {
 resource "nxos_save_config" "save-switch1a" {
   provider = nxos.switch1a
 }
-

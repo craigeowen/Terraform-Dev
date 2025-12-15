@@ -46,3 +46,33 @@ module "config-SW1b" {
         }    
 ]
 }   
+
+
+##### Return Data from Switches #####
+data "nxos_system" "system-info-switch1a" {
+  provider = nxos.switch1a
+}
+output "hostname" {
+  value = data.nxos_system.system-info-switch1a.name
+}
+
+data "nxos_loopback_interface" "nxos-lo101-switch1a" {
+  provider = nxos.switch1a
+  interface_id = "lo101"
+}
+output "lo101_admin_state-switch1a" {
+  value = data.nxos_loopback_interface.nxos-lo101-switch1a.admin_state
+} 
+output "lo101_description-switch1a" {
+  value = data.nxos_loopback_interface.nxos-lo101-switch1a.description
+}
+
+data "nxos_bgp_peer" "bgp_peer-info-switch1a" {
+  provider = nxos.switch1a
+  asn               = "65201"
+  vrf               = "VRF1"
+  address           = "10.24.1.253"
+}
+output "nxos_bgp" {
+  value = data.nxos_bgp_peer.bgp_peer-info-switch1a.description
+}

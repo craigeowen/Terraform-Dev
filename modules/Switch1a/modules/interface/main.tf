@@ -34,7 +34,7 @@ resource "nxos_loopback_interface" "int-lo101-switch1a" {
   provider = nxos.switch1a
   interface_id = "lo101"
   admin_state = "up"
-  description = "### Loopback 101 ###"
+  description = "### Loopback 101 v4###"
 }
 resource "nxos_loopback_interface_vrf" "int-lo101-VRF1-switch1a" {
   provider = nxos.switch1a
